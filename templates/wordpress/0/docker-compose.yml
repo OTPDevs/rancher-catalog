@@ -1,0 +1,30 @@
+version: '2'
+services:
+  mariadb:
+      image: 'mariadb:10.3.2'
+      volumes:
+        - 'mariadb_data:/var/lib/mysql'
+      environment:
+        MYSQL_ROOT_PASSWORD: wordpressroot
+        MYSQL_USER: wordpress
+        MYSQL_PASSWORD: wordpress
+        MYSQL_DATABASE: wordpress
+  wordpress:
+      image: 'wordpress:latest'
+      volumes:
+        - 'wordpress_data:/var/www/html/wp-content'
+      depends_on:
+        - mariadb
+      environment:
+        WORDPRESS_DB_HOST: mariadb:3306
+        WORDPRESS_DB_USER: wordpress
+        WORDPRESS_DB_PASSWORD: wordpress
+  wordpress-lb:
+    image: rancher/lb-service-haproxy:v0.7.5
+    ports:
+      - ${public_port}:${public_port}
+volumes:
+  mariadb_data:
+    driver: ${volume_driver}
+  wordpress_data:
+    driver: ${volume_driver}
