@@ -1,0 +1,37 @@
+version: '2'
+catalog:
+  name: "Cloud9"
+  version: "v0.1-otpdevs"
+  description: "Online IDE"
+  uuid: Cloud9-1
+  minimum_rancher_version: v0.51.0
+  questions:
+    - variable: public_port
+      description: "public port to access the cloud9 site"
+      label: "Public Port"
+      required: true
+      default: "5003"
+      type: "int"
+    - variable: volume_driver
+      description: "Volume driver to use with this service"
+      label: "Volume driver"
+      required: true
+      default: "local"
+      type: enum
+      options:
+        - local
+        - rancher-nfs
+        - rancher-efs
+        - rancher-ebs
+services:
+  cloud9:
+    scale: 1
+    retain_ip: true
+    health_check:
+      port: 80
+      interval: 5000
+      unhealthy_threshold: 3
+      request_line: 'GET / HTTP/1.0'
+      healthy_threshold: 2
+      response_timeout: 5000
+
