@@ -1,7 +1,7 @@
 version: '2'
 services:
   cloud9:
-      image: 'kdelfour/cloud9-docker'
+      image: 'egoexpress/cloud9'
       environment:
         - VIRTUAL_HOST=${c9_hostname}
         - CLOUD9_USER=${c9_user}
