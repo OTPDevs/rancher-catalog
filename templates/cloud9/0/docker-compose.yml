@@ -3,9 +3,9 @@ services:
   cloud9:
       image: 'kdelfour/cloud9-docker'
       environment:
-        - VIRTUAL_HOST=${DOCKER_CLOUD9_HOSTNAME}
-        - CLOUD9_USER=${DOCKER_CLOUD9_USERNAME}
-        - CLOUD9_PASS=${DOCKER_CLOUD9_PASSWORD}
+        - VIRTUAL_HOST=${c9_hostname}
+        - CLOUD9_USER=${c9_user}
+        - CLOUD9_PASS=${c9_password}
       volumes:
         - 'cloud9_data:/workspace'
       ports:

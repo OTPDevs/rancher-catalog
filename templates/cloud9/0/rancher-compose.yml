@@ -1,4 +1,4 @@
-version: '2'
+version: "2"
 catalog:
   name: "Cloud9"
   version: "v0.1-otpdevs"
@@ -23,6 +23,24 @@ catalog:
         - rancher-nfs
         - rancher-efs
         - rancher-ebs
+    - variable: c9_hostname
+      description: "Public Hostname"
+      label: "Hostname"
+      default: "c9.otpdevs.com"
+      required: true
+      type: string
+    - variable: c9_user
+      description: "Username"
+      label: "Username"
+      default: "otpdevs"
+      required: true
+      type: string
+    - variable: c9_password
+      description: "Password"
+      label: "password"
+      default: "otpdevs"
+      required: true
+      type: string
 services:
   cloud9:
     scale: 1
@@ -31,7 +49,7 @@ services:
       port: 80
       interval: 5000
       unhealthy_threshold: 3
-      request_line: 'GET / HTTP/1.0'
+      request_line: "GET / HTTP/1.0"
       healthy_threshold: 2
       response_timeout: 5000
 
